@@ -15,10 +15,17 @@ public class CompteCourant {
 		nbCompteCourant++;
 	}
 	
-	public void afficherCompte() {
+	public void afficher() {
 		System.out.println("Compte n° " + this.numero + ", intitule : " + this.intitule + " votre solde est de " + this.solde+".");
 	}
 	
+	public void crediter(double somme) {
+		this.solde += somme;
+	}
+	
+	public void debiter(double somme) {
+		this.solde -= somme;
+	}
 	
 	//Getter & Setter
 	public String getNumero() {
