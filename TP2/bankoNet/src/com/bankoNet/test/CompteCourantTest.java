@@ -1,6 +1,6 @@
 package com.bankoNet.test;
 import java.util.*;
-import com.bankoNet.CompteCourant;
+import com.bankoNet.src.CompteCourant;
 
 public class CompteCourantTest{
 	@org.junit.Test

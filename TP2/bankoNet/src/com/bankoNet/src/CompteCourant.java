@@ -1,4 +1,4 @@
-package com.bankoNet;
+package com.bankoNet.src;
 
 public class CompteCourant {
 	public String numero;
