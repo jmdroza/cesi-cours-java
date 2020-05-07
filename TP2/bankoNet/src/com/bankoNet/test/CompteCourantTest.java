@@ -19,6 +19,7 @@ public class CompteCourantTest{
 	@Test
 	public void IncrementCompteCourantTest() {
 		System.out.println("--- Début Test de nbCompteCourant ---");
+		//GIVEN - WHEN
 		compteCourant1 = new CompteCourant("003","CompteFamille", 1250, 300);
 		compteCourant2 = new CompteCourant("004","CompteEntreprise", 6500, 600);
 		compteCourant3 = new CompteCourant("005","CompteEtude", 5250, 50);
@@ -32,6 +33,7 @@ public class CompteCourantTest{
 		for(CompteCourant compte : listeCompte) {
 			compte.afficher();
 		}
+		//THEN
 		org.junit.Assert.assertTrue(CompteCourant.getNbCompteCourant() == 4);
 		System.out.println("--- Fin Test de nbCompteCourant ---");
 	}
@@ -39,16 +41,22 @@ public class CompteCourantTest{
 	@Test
 	public void crediterMtPositifTest() {
 		System.out.println("--- Début Test de créditer montant positif ---");
+		//GIVEN
 		compteCourant1 = new CompteCourant("003","CompteFamille", 1250, 300);
+		//WHEN
 		compteCourant1.crediter(5000);
+		//THEN
 		org.junit.Assert.assertTrue(compteCourant1.getSolde() == 6250);
 		System.out.println("--- Fin Test de créditer montant positif ---");
 	}
 	@Test
 	public void crediterMtNegatifTest() {
 		System.out.println("--- Début Test de créditer montant négatif ---");
+		//GIVEN
 		compteCourant2 = new CompteCourant("003","CompteFamille", 1250, 300);
+		//WHEN
 		compteCourant2.crediter(-250);
+		//THEN
 		org.junit.Assert.assertTrue(compteCourant2.getSolde() == 1250);
 		System.out.println("--- Fin Test de créditer montant négatif ---");
 	}
