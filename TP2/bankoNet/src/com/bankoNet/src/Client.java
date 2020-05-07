@@ -1,19 +1,26 @@
 package com.bankoNet.src;
 
+import java.util.List;
+
 public class Client {
 	private String identifiant;
 	private String nom;
 	private String prenom;
 	
-	private CompteCourant cptCourant;
-	private CompteEpargne cptEpargne;
+	private List<CompteCourant> lstCptCourant;
+	private List<CompteEpargne> lstCptEpargne;
 	
 	public Client(String identifiant, String nom, String prenom, CompteCourant cptCourant, CompteEpargne cptEpargne) {
 		this.identifiant = identifiant;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.cptCourant = cptCourant;
-		this.cptEpargne = cptEpargne;
+		
+		if(cptCourant != null) {
+			this.lstCptCourant.add(cptCourant);
+		}
+		if(cptEpargne != null) {
+			this.lstCptEpargne.add(cptEpargne);
+		}
 	}
 	
 	@Override
@@ -23,11 +30,15 @@ public class Client {
 	
 	public double calculerAvoirGlobal () {
 		double avoir = 0;
-		if(this.cptCourant!=null) {
-			avoir += this.cptCourant.getSolde();
+		if(this.lstCptCourant!=null && !this.lstCptCourant.isEmpty()) {
+			for(CompteCourant cptCourant : this.lstCptCourant) {
+				avoir += cptCourant.getSolde();
+			}
 		}
-		if(this.cptEpargne != null){
-			avoir += this.cptEpargne.getSolde();
+		if(this.lstCptEpargne!=null && !this.lstCptEpargne.isEmpty()) {
+			for(CompteEpargne cptEpargne : this.lstCptEpargne) {
+				avoir += cptEpargne.getSolde();
+			}
 		}
 		return avoir;
 	}
@@ -56,21 +67,7 @@ public class Client {
 		this.prenom = prenom;
 	}
 
-	public CompteCourant getCptCourant() {
-		return cptCourant;
-	}
 
-	public void setCptCourant(CompteCourant cptCourant) {
-		this.cptCourant = cptCourant;
-	}
-
-	public CompteEpargne getCptEpargne() {
-		return cptEpargne;
-	}
-
-	public void setCptEpargne(CompteEpargne cptEpargne) {
-		this.cptEpargne = cptEpargne;
-	}
 	
 	
 }

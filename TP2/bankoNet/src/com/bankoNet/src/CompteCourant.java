@@ -13,7 +13,11 @@ public class CompteCourant extends Compte{
 	public CompteCourant(String numero, String intitule, double solde, double montantDecouvertAutorise) {
 		super(numero, intitule, solde);
 		nbCompteCourant++;
-		this.montantDecouvertAutorise = montantDecouvertAutorise;
+		if(montantDecouvertAutorise < 0) {
+			this.montantDecouvertAutorise = -montantDecouvertAutorise;
+		}else {
+			this.montantDecouvertAutorise= montantDecouvertAutorise;
+		}
 	}
 	
 	public void afficher() {
@@ -28,14 +32,18 @@ public class CompteCourant extends Compte{
 		
 	}
 	
-	public void debiter(double somme) {
+	public boolean equals(CompteCourant cptCourant) {
+		return super.equals(cptCourant) && this.getMontantDecouvertAutorise() == cptCourant.getMontantDecouvertAutorise();
+	}
+	
+	public boolean isDebitAutorise(double somme) {
 		if(somme > 0) {
 			if((this.solde - somme) < - this.montantDecouvertAutorise) {
-				System.out.println("Opération non-autorisé, la somme a débité dépasse le montant découvert autorisé");
-			}else {
-				this.solde -= somme;
+				return false;
 			}
+				return true;
 		}
+		return false;
 	}
 	
 	//Getter & Setter

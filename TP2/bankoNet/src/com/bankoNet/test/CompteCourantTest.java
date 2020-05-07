@@ -2,6 +2,7 @@ package com.bankoNet.test;
 import java.util.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Assert;
 
 import com.bankoNet.src.CompteCourant;
 
@@ -34,7 +35,7 @@ public class CompteCourantTest{
 			compte.afficher();
 		}
 		//THEN
-		org.junit.Assert.assertTrue(CompteCourant.getNbCompteCourant() == 4);
+		Assert.assertTrue(CompteCourant.getNbCompteCourant() == 4);
 		System.out.println("--- Fin Test de nbCompteCourant ---");
 	}
 	
@@ -46,7 +47,7 @@ public class CompteCourantTest{
 		//WHEN
 		compteCourant1.crediter(5000);
 		//THEN
-		org.junit.Assert.assertTrue(compteCourant1.getSolde() == 6250);
+		Assert.assertTrue(compteCourant1.getSolde() == 6250);
 		System.out.println("--- Fin Test de créditer montant positif ---");
 	}
 	@Test
@@ -57,7 +58,7 @@ public class CompteCourantTest{
 		//WHEN
 		compteCourant2.crediter(-250);
 		//THEN
-		org.junit.Assert.assertTrue(compteCourant2.getSolde() == 1250);
+		Assert.assertTrue(compteCourant2.getSolde() == 1250);
 		System.out.println("--- Fin Test de créditer montant négatif ---");
 	}
 
@@ -67,7 +68,7 @@ public class CompteCourantTest{
 		System.out.println("--- Début Test de débiter montant positif ---");
 		compteCourant3 = new CompteCourant("005","CompteEtude", 5250, 50);
 		compteCourant3.debiter(5000);
-		org.junit.Assert.assertTrue(compteCourant3.getSolde() == 250);
+		Assert.assertTrue(compteCourant3.getSolde() == 250);
 		System.out.println("--- Fin Test de débiter montant positif ---");
 	}
 	
@@ -76,7 +77,28 @@ public class CompteCourantTest{
 		System.out.println("--- Début Test de débiter pour dépasser le solde ---");
 		compteCourant4 = new CompteCourant("006","CompteEntreprise", 5400, 300);
 		compteCourant4.debiter(8000);
-		org.junit.Assert.assertTrue(compteCourant4.getSolde() == 5400);
-		System.out.println("--- Fin Test de débiter pour dépasser le solde ---");
+		Assert.assertTrue(compteCourant4.getSolde() == 5400);
+		System.out.println("--- Fin Test de débiter pour dépasser le solde ---\n");
+	}
+	
+	@Test
+	public void toStringTest() {
+		System.out.println("--- Début Test toString ---");
+		compteCourant1 = new CompteCourant("003","CompteFamille", 1250, 300);
+		Assert.assertTrue(compteCourant1.toString().contentEquals("Compte n° 003, intitule : CompteFamille votre solde est de 1250.0."));
+		System.out.println("--- Fin Test toString ---");
+	}
+	
+	@Test
+	public void constructeurEtEqualsTest() {
+		System.out.println("--- Début Test toString ---");
+		compteCourant1 = new CompteCourant("003","CompteFamille", -20, -300);
+		CompteCourant compteValide = new CompteCourant("003","CompteFamille", 0, 300);
+		Assert.assertTrue(compteCourant1.equals(compteValide));
+		Assert.assertTrue(compteCourant1.getNumero() == "003");
+		Assert.assertTrue(compteCourant1.getIntitule() == "CompteFamille");	
+		Assert.assertTrue(compteCourant1.getSolde() == 0.0);
+		Assert.assertTrue(compteCourant1.getMontantDecouvertAutorise() == 300);
+		System.out.println("--- Fin Test toString ---");
 	}
 }
