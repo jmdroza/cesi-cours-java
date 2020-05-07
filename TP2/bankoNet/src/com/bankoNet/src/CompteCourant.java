@@ -29,10 +29,12 @@ public class CompteCourant extends Compte{
 	}
 	
 	public void debiter(double somme) {
-		if((this.solde - somme) < - this.montantDecouvertAutorise) {
-			System.out.println("Opération non-autorisé, la somme a débité dépasse le montant découvert autorisé");
-		}else {
-			this.solde -= somme;
+		if(somme > 0) {
+			if((this.solde - somme) < - this.montantDecouvertAutorise) {
+				System.out.println("Opération non-autorisé, la somme a débité dépasse le montant découvert autorisé");
+			}else {
+				this.solde -= somme;
+			}
 		}
 	}
 	
